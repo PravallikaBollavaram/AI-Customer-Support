@@ -9,7 +9,7 @@ An AI-powered customer support chatbot using Next.js and the OpenAI API.
 - Navigate to repository : cd respository_name
 - Navigate to project folder: cd project_folder_name
 - install dependencies  
-  ####**Dependencies**
+  #### **Dependencies**
   - npm install
   - npm install @mui/material @emotion/react @emotion/styled
   - npm install @mui/icons-material
