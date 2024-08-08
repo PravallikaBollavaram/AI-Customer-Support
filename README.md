@@ -3,12 +3,12 @@ An AI-powered customer support chatbot using Next.js and the OpenAI API.
 
 ##**Features**
 
-##**Installation:**
+##**Installation:**  
 ###**Steps**
 - Clone the repository : git clone https://github.com/PravallikaBollavaram/AI-Customer-Support
 - Navigate to repository : cd respository_name
 - Navigate to project folder: cd project_folder_name
-- install dependencies
+- install dependencies  
   ####**Dependencies**
   - npm install
   - npm install @mui/material @emotion/react @emotion/styled
@@ -17,7 +17,7 @@ An AI-powered customer support chatbot using Next.js and the OpenAI API.
 
 ##**API Configuration Steps**
 
-##**Technology Stack**
+##**Technology Stack**  
 ###**Front-end:**
 - NextJs
 - Material UI
