@@ -1,5 +1,3 @@
-// app/components/Interface.js
-
 "use client";
 
 import React, { useState } from 'react';
@@ -45,17 +43,39 @@ export default function Interface({ closeChat }) {
   const [inputText, setInputText] = useState('');
 
   const handleSendMessage = () => {
-    if (inputText.trim()) {
-      setMessages([...messages, { text: inputText, isUser: true }]);
-      setInputText('');
-      // Simulate bot response
-      setTimeout(() => {
-        setMessages(prevMessages => [
-          ...prevMessages,
-          { text: 'This is a bot response.', isUser: false },
-        ]);
-      }, 500);
-    }
+    if (!inputText.trim()) return;
+
+    // Add the user's message to the chat
+    setMessages([...messages, { text: inputText, isUser: true }]);
+
+    // Make the API call
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ content: inputText }),
+    })
+      .then((res) => {
+        console.log("Response status:", res.status); // Log the status
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Response data:", data); // Log the data
+        const botMessage = data.choices && data.choices.length > 0
+          ? data.choices[0].message.content
+          : "Sorry, I couldn't find an answerr.";
+        setMessages((prevMessages) => [...prevMessages, { text: botMessage, isUser: false }]);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setMessages((prevMessages) => [...prevMessages, { text: `Error: ${error.message}`, isUser: false }]);
+      });
+
+    setInputText(''); // Clear the input field
   };
 
   return (
@@ -67,14 +87,6 @@ export default function Interface({ closeChat }) {
         width: '800px',
         margin: 'auto',
         marginTop: '40px'
-    //   position: 'fixed',
-    //   bottom: 16,
-    //   right: 'center',
-    //   width: 300,
-    //   height: '80vh',
-    //   display: 'flex',
-    //   flexDirection: 'column',
-    //   padding: '16px' 
     }}>
       <Header closeChat={closeChat} />
       <Box sx={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
@@ -95,6 +107,6 @@ export default function Interface({ closeChat }) {
           <SendIcon/>
         </Button>
       </Box>
-    </Paper>                   
+    </Paper>
   );
 }
