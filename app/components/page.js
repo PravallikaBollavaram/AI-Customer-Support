@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, TextField, Button, Paper, Box, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
+import { useRouter } from 'next/navigation';
 
 // Component for the header
 function Header({ closeChat }) {
@@ -37,9 +38,10 @@ function MessageBubble({ message, isUser }) {
   );
 }
 
-export default function Interface({ closeChat }) {
+export default function Interface() {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
+  const router = useRouter();
 
   const handleSendMessage = () => {
     if (!inputText.trim()) return;
@@ -73,6 +75,10 @@ export default function Interface({ closeChat }) {
       });
 
     setInputText(''); // Clear the input field
+  };
+
+  const closeChat = () => {
+    router.push('/'); // Navigate back to the home page
   };
 
   return (
