@@ -1,11 +1,10 @@
-// app/components/Interface.js
-
 "use client";
 
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, TextField, Button, Paper, Box, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
+import { useRouter } from 'next/navigation';
 
 // Component for the header
 function Header({ closeChat }) {
@@ -40,9 +39,10 @@ function MessageBubble({ message, isUser }) {
   );
 }
 
-export default function Interface({ closeChat }) {
+export default function Interface() {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
+  const router = useRouter();
 
   const handleSendMessage = () => {
     if (inputText.trim()) {
@@ -58,6 +58,10 @@ export default function Interface({ closeChat }) {
     }
   };
 
+  const closeChat = () => {
+    router.push('/'); // Navigate back to the home page
+  };
+
   return (
     <Paper elevation={3} sx={{ 
         height: '80vh', 
@@ -67,14 +71,6 @@ export default function Interface({ closeChat }) {
         width: '800px',
         margin: 'auto',
         marginTop: '40px'
-    //   position: 'fixed',
-    //   bottom: 16,
-    //   right: 'center',
-    //   width: 300,
-    //   height: '80vh',
-    //   display: 'flex',
-    //   flexDirection: 'column',
-    //   padding: '16px' 
     }}>
       <Header closeChat={closeChat} />
       <Box sx={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>

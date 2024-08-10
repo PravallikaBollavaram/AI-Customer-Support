@@ -13,6 +13,7 @@ An AI-powered customer support chatbot using Next.js and the OpenAI API.
   - npm install
   - npm install @mui/material @emotion/react @emotion/styled
   - npm install @mui/icons-material
+  - npm install firebase
 - Run locally : npm run dev
 
 ## **API Configuration Steps**
