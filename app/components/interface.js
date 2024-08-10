@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, TextField, Button, Paper, Box, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -8,8 +7,8 @@ import SendIcon from '@mui/icons-material/Send';
 // Component for the header
 function Header({ closeChat }) {
   return (
-    <AppBar position="static">
-      <Toolbar>
+    <AppBar position="static" >
+      <Toolbar variant='h6'>
         <Typography variant="h6">Chatbot</Typography>
         <IconButton edge="end" color="inherit" onClick={closeChat} sx={{ ml: 'auto' }}>
           <CloseIcon />
@@ -24,7 +23,7 @@ function MessageBubble({ message, isUser }) {
   return (
     <Box
       sx={{
-        backgroundColor: isUser ? 'primary.main' : 'grey.300',
+        backgroundColor: isUser ? '#ff4569' : '#00b0ff',
         color: isUser ? 'white' : 'black',
         borderRadius: '16px',
         padding: '8px 16px',
@@ -65,9 +64,7 @@ export default function Interface({ closeChat }) {
       })
       .then((data) => {
         console.log("Response data:", data); // Log the data
-        const botMessage = data.choices && data.choices.length > 0
-          ? data.choices[0].message.content
-          : "Sorry, I couldn't find an answerr.";
+        const botMessage = data.botMessage || "Sorry, I couldn't find an answer.";
         setMessages((prevMessages) => [...prevMessages, { text: botMessage, isUser: false }]);
       })
       .catch((error) => {
@@ -88,8 +85,8 @@ export default function Interface({ closeChat }) {
         margin: 'auto',
         marginTop: '40px'
     }}>
-      <Header closeChat={closeChat} />
-      <Box sx={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+      <Header  closeChat={closeChat} />
+      <Box sx={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', bgcolor:'#795548', padding:'20px' }}>
         {messages.map((msg, index) => (
           <MessageBubble key={index} message={msg.text} isUser={msg.isUser} />
         ))}
