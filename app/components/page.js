@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, TextField, Button, Paper, Box, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -9,8 +8,8 @@ import { useRouter } from 'next/navigation';
 // Component for the header
 function Header({ closeChat }) {
   return (
-    <AppBar position="static">
-      <Toolbar>
+    <AppBar position="static" >
+      <Toolbar variant='h6'>
         <Typography variant="h6">Chatbot</Typography>
         <IconButton edge="end" color="inherit" onClick={closeChat} sx={{ ml: 'auto' }}>
           <CloseIcon />
@@ -25,7 +24,7 @@ function MessageBubble({ message, isUser }) {
   return (
     <Box
       sx={{
-        backgroundColor: isUser ? 'primary.main' : 'grey.300',
+        backgroundColor: isUser ? '#ff4569' : '#00b0ff',
         color: isUser ? 'white' : 'black',
         borderRadius: '16px',
         padding: '8px 16px',
@@ -45,17 +44,37 @@ export default function Interface() {
   const router = useRouter();
 
   const handleSendMessage = () => {
-    if (inputText.trim()) {
-      setMessages([...messages, { text: inputText, isUser: true }]);
-      setInputText('');
-      // Simulate bot response
-      setTimeout(() => {
-        setMessages(prevMessages => [
-          ...prevMessages,
-          { text: 'This is a bot response.', isUser: false },
-        ]);
-      }, 500);
-    }
+    if (!inputText.trim()) return;
+
+    // Add the user's message to the chat
+    setMessages([...messages, { text: inputText, isUser: true }]);
+
+    // Make the API call
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ content: inputText }),
+    })
+      .then((res) => {
+        console.log("Response status:", res.status); // Log the status
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Response data:", data); // Log the data
+        const botMessage = data.botMessage || "Sorry, I couldn't find an answer.";
+        setMessages((prevMessages) => [...prevMessages, { text: botMessage, isUser: false }]);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setMessages((prevMessages) => [...prevMessages, { text: `Error: ${error.message}`, isUser: false }]);
+      });
+
+    setInputText(''); // Clear the input field
   };
 
   const closeChat = () => {
@@ -72,8 +91,8 @@ export default function Interface() {
         margin: 'auto',
         marginTop: '40px'
     }}>
-      <Header closeChat={closeChat} />
-      <Box sx={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+      <Header  closeChat={closeChat} />
+      <Box sx={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', bgcolor:'#795548', padding:'20px' }}>
         {messages.map((msg, index) => (
           <MessageBubble key={index} message={msg.text} isUser={msg.isUser} />
         ))}
@@ -91,6 +110,6 @@ export default function Interface() {
           <SendIcon/>
         </Button>
       </Box>
-    </Paper>                   
+    </Paper>
   );
 }
