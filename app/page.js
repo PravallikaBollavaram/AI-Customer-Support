@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { IconButton, Box, AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
-import { signOutUser, getAuthState } from '@/app/signout/page'; // Renamed function to avoid conflict
+import { signOutUser, getAuthState } from '@/app/signout/page'; 
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = getAuthState((currentUser) => {
+    const unsubscribe = getAuthState((currentUser) => { 
       setUser(currentUser);
     });
 

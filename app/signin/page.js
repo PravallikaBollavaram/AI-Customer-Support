@@ -1,55 +1,49 @@
+// app/signin/page.js
 "use client";
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Grid, TextField, Button, Typography, Box } from '@mui/material';
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { auth } from '@/app/firebase/config';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import {auth, db} from '@/app/firebase/config';
 import { useRouter } from 'next/navigation';
+
 
 export default function Signin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('null');
     const router = useRouter();
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, redirect to the homepage
-                router.push('/');
-            } else {
-                // User is not signed in, continue to show the signin page
-                setLoading(false);
-            }
-        });
-
-        return () => unsubscribe();
-    }, [router]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-            console.log('Signed in user:', user);
-            router.push('/');
-        } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setError(errorMessage);
-            console.error('Error signing in:', errorCode, errorMessage);
-        }
+        try{
+        const userCredential = await signInWithEmailAndPassword(auth, email, password )
+        // Home();
+    // Signed in 
+        const user = userCredential.user;
+        console.log('Signed in user:', user);
+        router.push('/');
+    // ...
+  }
+  catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setError(errorMessage);
+    console.error('Error signing in:', errorCode, errorMessage);
+  }
+        // Add your sign-in logic here (e.g., authentication)
+    //     console.log({
+    //         email: email,
+    //         password: password,
+    //     });
     };
 
-    if (loading) {
-        return <div>Loading...</div>; // Optional: Loading state while checking auth
-    }
-
     return (
-        <Container maxWidth="xs" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+        <Container maxWidth="xs"
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}
+        >
             <Box
                 sx={{
+                    // alignItems: "center",
                     mt: 18,
                     p: 3,
                     borderRadius: 2,
@@ -100,13 +94,6 @@ export default function Signin() {
                         </Grid>
                     </Grid>
                 </form>
-                {error && (
-                    <Box mt={2} textAlign="center">
-                        <Typography variant="body2" color="error">
-                            {error}
-                        </Typography>
-                    </Box>
-                )}
                 <Box mt={2} textAlign="center">
                     <Typography variant="body2" color="textSecondary">
                         Not a member? <a href="/signup" style={{ color: '#1976d2' }}>Signup Here</a>
