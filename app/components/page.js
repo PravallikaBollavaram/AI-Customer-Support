@@ -92,7 +92,7 @@ export default function Interface() {
         marginTop: '40px'
     }}>
       <Header  closeChat={closeChat} />
-      <Box sx={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', bgcolor:'#795548', padding:'20px' }}>
+      <Box sx={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', bgcolor:'white', padding:'20px' }}>
         {messages.map((msg, index) => (
           <MessageBubble key={index} message={msg.text} isUser={msg.isUser} />
         ))}
