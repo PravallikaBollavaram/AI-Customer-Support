@@ -67,10 +67,10 @@ export default function Signup() {
                 }}
             >
                 <Typography variant="h5" align="center" gutterBottom>
-                    Join us today!
+                    {"Join us today!"}
                 </Typography>
                 <Typography variant="body2" align="center" color="textSecondary" gutterBottom>
-                    Sign up now to become a member.
+                    {"Sign up now to become a member."}
                 </Typography>
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
@@ -135,14 +135,14 @@ export default function Signup() {
                                 color="primary"
                                 size="large"
                             >
-                                Signup
+                                {"Signup"}
                             </Button>
                         </Grid>
                     </Grid>
                 </form>
                 <Box mt={2} textAlign="center">
                     <Typography variant="body2" color="textSecondary">
-                        Already a member? <a href="/signin" style={{ color: '#1976d2' }}>Login Here</a>
+                        {"Already a member?"} <a href="/signin" style={{ color: '#1976d2' }}>Login Here</a>
                     </Typography>
                 </Box>
             </Box>

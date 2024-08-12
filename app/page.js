@@ -32,15 +32,15 @@ export default function Home() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            My ChatBot!
+            {"My ChatBot!"}
           </Typography>
           {user ? (
             <Button color="inherit" onClick={handleLogout}>
-              Logout
+              {"Logout"}
             </Button>
           ) : (
             <Button color="inherit" href="/signin">
-              Login
+              {"Login"}
             </Button>
           )}
         </Toolbar>
@@ -64,20 +64,20 @@ export default function Home() {
           {user ? (
             <>
               <Typography variant="h4" align="center" gutterBottom>
-                Welcome back, {user.displayName || 'User'}!
+                {"Welcome back!"}
               </Typography>
               <Typography variant="body1" align="center" color="textSecondary">
-                We're glad to see you again.
+                {"We're glad to see you again."}
               </Typography>
             </>
           ) : (
             <>
               <Typography variant="h4" align="center" gutterBottom>
-                Welcome to My ChatBot!
+                {'Welcome to My ChatBot!'}
               </Typography>
               <Typography variant="body1" align="center" color="textSecondary">
-                Unlock Your Potential: Chat with Our AI Bot! 
-                Please log in to ask your questions!
+                {'Unlock Your Potential: Chat with Our AI Bot!'}
+                {'Please log in to ask your questions!'}
               </Typography>
             </>
           )}

@@ -52,10 +52,10 @@ export default function Signin() {
                 }}
             >
                 <Typography variant="h5" align="center" gutterBottom>
-                    Welcome back!
+                   {" Welcome back!"}
                 </Typography>
                 <Typography variant="body2" align="center" color="textSecondary" gutterBottom>
-                    Log in to access your account.
+                    {"Log in to access your account."}
                 </Typography>
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
@@ -96,7 +96,7 @@ export default function Signin() {
                 </form>
                 <Box mt={2} textAlign="center">
                     <Typography variant="body2" color="textSecondary">
-                        Not a member? <a href="/signup" style={{ color: '#1976d2' }}>Signup Here</a>
+                        {"Not a member?"} <a href="/signup" style={{ color: '#1976d2' }}>Signup Here</a>
                     </Typography>
                 </Box>
             </Box>
