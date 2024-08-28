@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { IconButton, Box, AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
-import { signOutUser, getAuthState } from '@/app/signout/page'; 
+import { signOutUser, getAuthState } from '@/app/signout/SignOutComponent'; // Updated import
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
