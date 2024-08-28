@@ -1,7 +1,8 @@
-# **AI Support Customer**
+# **AI Customer Support**
 An AI-powered customer support chatbot using Next.js and the OpenAI API.
 
-## **Features**
+## **Features**  
+-- ChatBot with AI integration.
 
 ## **Installation:**  
 ### **Steps**  
@@ -16,10 +17,7 @@ An AI-powered customer support chatbot using Next.js and the OpenAI API.
   - npm install firebase
 - Run locally : npm run dev
 
-## **API Configuration Steps**
-
-## **Technology Stack**  
-### **Front-end:**  
+## **Technology Stack**   
 - NextJs
 - Material UI
 
