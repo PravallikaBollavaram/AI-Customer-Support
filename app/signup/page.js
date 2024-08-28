@@ -1,10 +1,10 @@
-// app/signup/page.js
 "use client";
 import React, { useState } from 'react';
 import { Container, Grid, TextField, Button, Typography, Box } from '@mui/material';
-import {auth, db} from '@/app/firebase/config';
-import {createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from '@/app/firebase/config';
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from 'firebase/firestore';
+import { useRouter } from 'next/navigation';
 
 export default function Signup() {
     const [firstName, setFirstName] = useState('');
@@ -12,7 +12,8 @@ export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('null');
+    const [error, setError] = useState(null);
+    const router = useRouter();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -39,7 +40,7 @@ export default function Signup() {
             setPassword('');
             setConfirmPassword('');
             setError(null);
-            alert("Signup successful!");
+            router.push('/signin'); // Redirect to sign-in page after successful sign-up
 
         } catch (error) {
             setError(error.message);
@@ -52,7 +53,6 @@ export default function Signup() {
         }
     };
 
-        
     return (
         <Container maxWidth="xs"
         sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}
@@ -67,10 +67,10 @@ export default function Signup() {
                 }}
             >
                 <Typography variant="h5" align="center" gutterBottom>
-                    Join us today!
+                    {"Join us today!"}
                 </Typography>
                 <Typography variant="body2" align="center" color="textSecondary" gutterBottom>
-                    Sign up now to become a member.
+                    {"Sign up now to become a member."}
                 </Typography>
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
@@ -135,14 +135,14 @@ export default function Signup() {
                                 color="primary"
                                 size="large"
                             >
-                                Signup
+                                {"Signup"}
                             </Button>
                         </Grid>
                     </Grid>
                 </form>
                 <Box mt={2} textAlign="center">
                     <Typography variant="body2" color="textSecondary">
-                        Already a member? <a href="/signin" style={{ color: '#1976d2' }}>Login Here</a>
+                        {"Already a member?"} <a href="/signin" style={{ color: '#1976d2' }}>Login Here</a>
                     </Typography>
                 </Box>
             </Box>
